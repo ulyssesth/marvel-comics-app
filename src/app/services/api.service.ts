@@ -25,12 +25,11 @@ export class ApiService {
   
   
   getHeroesPage(page, filter): Observable<HeroesResponse> {
-    if (!filter) {
-      return this.http.get<HeroesResponse>(`${this.baseUrl}characters${this.key}&offset=${(page * this.limit)}&limit=${this.limit}`);
-      
-    } else {
-      return this.http.get<HeroesResponse>(`${this.baseUrl}characters${this.key}&offset=${(page * this.limit)}&limit=${this.limit}&nameStartsWith=${filter}`);
-    }
+    return this.http.get<HeroesResponse>(`${this.baseUrl}characters${this.key}&offset=${(page * this.limit)}&limit=${this.limit}`);
+  }
+  
+  getHeroesFiltering(page, filter): Observable<HeroesResponse> {
+    return this.http.get<HeroesResponse>(`${this.baseUrl}characters${this.key}&offset=${(page * this.limit)}&limit=${this.limit}&nameStartsWith=${filter}`);
   }
   
   getComicsPage(idHero, page): Observable<ComicsResponse> {

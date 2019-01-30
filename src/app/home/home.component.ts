@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SQUADS } from '../mocks/squads-mock';
 
 @Component({
   selector: 'app-home',
@@ -8,9 +9,15 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
+  private lsSquads: any;
+
   constructor(private router: Router) { }
 
   ngOnInit() {
+    if (window.localStorage.getItem('squads') === null) {
+      let parseJson = JSON.stringify(SQUADS);
+      window.localStorage.setItem('squads', parseJson);  
+    }
   }
 
   navToHeroes() {

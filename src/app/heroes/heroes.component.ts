@@ -14,40 +14,46 @@ export class HeroesComponent implements OnInit {
 
   private heroes: Array<Hero> = [];
   
-  private comics: Array<any> = [];
-  
   private page: HeroesResponse;
   
-  private pageComic: ComicsResponse;
-  
-  private totalRecords;
-
-  private totalComics;
-  
-  private cols: any[];
+  private totalRecords = 0;
 
   private filterHero = '';
 
   private selectedHero: Hero;
-
+  
   private displayDialog = false;
-
+  
   private heroName = '';
+  
+
+
+  private comics: Array<any> = [];
+  
+  private pageComic: ComicsResponse;
+  
+  private totalComics = 0;
+  
+  // private cols: any[];
+
+
+
+
 
 constructor(private apiService: ApiService) { }
 
   ngOnInit() {
     this.pageHeroes(0, this.filterHero);
 
-    this.cols = [
-      { field: 'name', header: 'Name' },
-      { field: 'description', header: 'Description' },
-    ];
+    // this.cols = [
+    //   { field: 'name', header: 'Name' },
+    //   { field: 'description', header: 'Description' },
+    // ];
   }
 
   pageHeroes(page, filterHero) {
     if (filterHero) {
-      this.apiService.getHeroesPage(page, filterHero).subscribe(res => {
+      this.apiService.getHeroesFiltering(page, filterHero).subscribe(res => {
       this.page = res.data;
       // console.log(res);
       // console.log(this.page);

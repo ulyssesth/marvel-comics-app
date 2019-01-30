@@ -7,6 +7,7 @@ import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { PaginatorModule } from 'primeng/paginator';
 import { DialogModule } from 'primeng/dialog';
+import { InputTextModule } from 'primeng/inputtext';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,7 +31,8 @@ import { SquadsComponent } from './squads/squads.component';
     ButtonModule,
     TableModule,
     PaginatorModule,
-    DialogModule
+    DialogModule,
+    InputTextModule
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]
