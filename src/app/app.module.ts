@@ -1,10 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
 import { ButtonModule } from 'primeng/button';
-import {TableModule} from 'primeng/table';
+import { TableModule } from 'primeng/table';
+import { PaginatorModule } from 'primeng/paginator';
+import { DialogModule } from 'primeng/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,7 +28,9 @@ import { SquadsComponent } from './squads/squads.component';
     HttpClientModule,
     BrowserAnimationsModule,
     ButtonModule,
-    TableModule
+    TableModule,
+    PaginatorModule,
+    DialogModule
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]

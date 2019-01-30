@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-
-import { LazyLoadEvent } from 'primeng/api';
  
 import { ApiService } from '../services/api.service';
 import { Hero } from '../models/heroes.model';
+import { HeroesResponse } from '../models/heroes.response';
+import { ComicsResponse } from '../models/comics.response';
 
 @Component({
   selector: 'app-heroes',
@@ -12,60 +12,112 @@ import { Hero } from '../models/heroes.model';
 })
 export class HeroesComponent implements OnInit {
 
-  heroes: Hero[];
+  private heroes: Array<Hero> = [];
   
-  datasource: Hero[];
+  private comics: Array<any> = [];
   
-  totalRecords: number;
+  private page: HeroesResponse;
+  
+  private pageComic: ComicsResponse;
+  
+  private totalRecords;
 
-  cols: any[];
-
-  rows: any;
+  private totalComics;
   
-  loading: boolean;
+  private cols: any[];
+
+  private filterHero = '';
+
+  private selectedHero: Hero;
+
+  private displayDialog = false;
+
+  private heroName = '';
 
 constructor(private apiService: ApiService) { }
 
   ngOnInit() {
-    this.listHeroes();
-  //   this.apiService.getHeroes().subscribe(res => {
-  //     this.datasource = res.data.results;
-      
-  //     this.rows = this.datasource.length;
-      
-  //     this.totalRecords = res.data.total;
-  // });
+    this.pageHeroes(0, this.filterHero);
 
     this.cols = [
       { field: 'name', header: 'Name' },
-      { field: 'description', header: 'Description' }
+      { field: 'description', header: 'Description' },
     ];
-
-    this.loading = true;
   }
 
-  listHeroes() {
-  //   this.apiService.getHeroes().subscribe(res => {
-  //     this.heroes = res.data.results 
-  //     console.log(res.data.results);
-  //   });
-    this.apiService.getHeroes().subscribe(res => {
-      this.datasource = res.data.results;
-      
-      this.rows = this.datasource.length;
-      
+  pageHeroes(page, filterHero) {
+    if (filterHero) {
+      this.apiService.getHeroesPage(page, filterHero).subscribe(res => {
+      this.page = res.data;
+      // console.log(res);
+      // console.log(this.page);
+
       this.totalRecords = res.data.total;
-  });
+      // console.log(this.totalRecords);
+      
+      
+      this.heroes = res.data.results;
+      // console.log(this.heroes);
+    });
+      
+    } else {
+      this.apiService.getHeroesPage(page, '').subscribe(res => {
+      this.page = res.data;
+      // console.log(res);
+      // console.log(this.page);
+
+      this.totalRecords = res.data.total;
+      // console.log(this.totalRecords);
+      
+      
+      this.heroes = res.data.results;
+      // console.log(this.heroes);
+    });
+  }
+}
+
+  filter() {
+    this.pageHeroes(0, this.filterHero);
+    // console.log(this.filterHero);
   }
 
-  loadHeroLazy(event: LazyLoadEvent) {
-    this.loading = true;
-      setTimeout(() => {
-        if (this.datasource) {
-          this.heroes = this.datasource.slice(event.first, (event.first + event.rows));
-          this.loading = false;
-        }
-    }, 2000);
+  paginate(event) {
+    this.pageHeroes(event.page, this.filterHero);
   }
 
+  selectHero(event: Event, hero: Hero, name: any) {
+    // console.log(hero); 
+    this.heroName = name;  
+    this.selectedHero = hero;
+    this.displayDialog = true;
+    event.preventDefault();
+
+    this.pageComics(hero.id, 0);
+  }
+  
+  onDialogHide() {
+    this.selectedHero = null;
+  }
+
+  pageComics(idHero, page) {
+    // console.log(idHero);
+    
+    this.apiService.getComicsPage(idHero, page).subscribe(res => {
+      this.pageComic = res.data;
+      // console.log(this.pageComic);
+
+      this.totalComics = res.data.total;
+      // console.log(this.totalComics);
+      
+      
+      this.comics = res.data.results;
+      // console.log(this.comics);
+    });
+  }
+
+  paginateComics(event) {
+    this.pageComics(this.selectedHero.id, event.page);
+    // console.log(event.page);
+    
+  }
 }
