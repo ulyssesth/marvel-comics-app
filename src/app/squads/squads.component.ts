@@ -46,8 +46,8 @@ export class SquadsComponent implements OnInit {
     this.idSquad ++;
 
     arrSquad.push(newSquad);
-    let parseJson = JSON.stringify(arrSquad);
-    window.localStorage.setItem('squads', parseJson);
+    let parseString = JSON.stringify(arrSquad);
+    window.localStorage.setItem('squads', parseString);
     // console.log(window.localStorage.getItem('squads'));
     
     this.squads = JSON.parse(window.localStorage.getItem('squads'));
@@ -62,14 +62,28 @@ export class SquadsComponent implements OnInit {
     
   }
 
-  selectSquad(squad: Squads) {
+  selectSquad(index: any) {
+  // selectSquad(squad: Squads, index: any) {
+
     // console.log(squad);
     
-    window.localStorage.removeItem('editSquad');
-    let sendSquad = JSON.stringify(squad);
-    window.localStorage.setItem('editSquad', sendSquad);
+    window.localStorage.removeItem('indexSquad');
+    // let sendSquad = JSON.stringify(index);
+    window.localStorage.setItem('indexSquad', index.toString());
 
     this.router.navigate(['/edit-squad']);
   }
+
+  // selectSquad(squad: Squads) {
+  // // selectSquad(squad: Squads, index: any) {
+
+  //   // console.log(squad);
+    
+  //   window.localStorage.removeItem('editSquad');
+  //   let sendSquad = JSON.stringify(squad);
+  //   window.localStorage.setItem('editSquad', sendSquad);
+
+  //   this.router.navigate(['/edit-squad']);
+  // }
 
 }

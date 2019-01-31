@@ -15,7 +15,9 @@
     </form>
     
     <ng-container *ngFor="let squad of squads">
-      <p-card (click)="selectSquad(squad)" [style]="{width: '360px'}">
+      <p-card (click)="selectSquad(squads.indexOf(squad))" [style]="{width: '360px'}">
+      <!-- <p-card (click)="selectSquad(squad, squads.indexOf(squad))" [style]="{width: '360px'}"> -->
+
         <span> {{ squad.id }} </span> {{ squad.name }}
       </p-card>
     </ng-container>

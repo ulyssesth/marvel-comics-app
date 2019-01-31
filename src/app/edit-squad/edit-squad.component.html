@@ -1,5 +1,11 @@
 <h1>{{ squad.name }}</h1>
 
-<p-autoComplete [(ngModel)]="hero" [suggestions]="filteredHeroes" (completeMethod)="filterHero($event)" field="name" [size]="30"
+<p-autoComplete [(ngModel)]="hero" [suggestions]="filteredHeroes" (completeMethod)="filterHero($event)" (onSelect)="selectHero($event)" field="name" [size]="30"
     placeholder="Heroes" [minLength]="1"></p-autoComplete>
 <span style="margin-left:10px">Hero: {{ hero ? hero.name||hero : 'none' }}</span>
+
+<!-- <table>
+  <th *ngFor="let hero of heroes">
+    <td></td>
+  </th>
+</table> -->
