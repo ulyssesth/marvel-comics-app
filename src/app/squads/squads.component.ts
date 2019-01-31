@@ -14,20 +14,20 @@ export class SquadsComponent implements OnInit {
 
   private newSquadName;
 
-  private idSquad: number = 7;
+  private idSquad;
 
   constructor(private router: Router) { }
 
   ngOnInit() {
-
-    // console.log(window.localStorage.getItem('squads'));
-    if (window.localStorage.getItem('squads') === null) {
-      let parseJson = JSON.stringify(SQUADS);
-      window.localStorage.setItem('squads', parseJson);  
-    }
+    // if (window.localStorage.getItem('squads') === null) {
+    //   let parseJson = JSON.stringify(SQUADS);
+    //   window.localStorage.setItem('squads', parseJson);  
+    // }
     
     this.squads = JSON.parse(window.localStorage.getItem('squads'));
     // console.log(this.squads);
+    this.idSquad = JSON.parse(window.localStorage.getItem('idStart'));
+    console.log(this.idSquad);
     
   }
 
@@ -44,6 +44,8 @@ export class SquadsComponent implements OnInit {
     };
 
     this.idSquad ++;
+
+    window.localStorage.setItem('idStart', this.idSquad.toString());
 
     arrSquad.push(newSquad);
     let parseString = JSON.stringify(arrSquad);

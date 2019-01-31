@@ -83,8 +83,9 @@ constructor(private apiService: ApiService) { }
 }
 
   filter() {
-    this.pageHeroes(0, this.filterHero);
-    // console.log(this.filterHero);
+    if (this.filterHero.trim().length > 0) {
+      this.pageHeroes(0, this.filterHero.trim());
+    }
   }
 
   paginate(event) {

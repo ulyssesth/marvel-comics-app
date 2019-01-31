@@ -18,6 +18,10 @@ export class HomeComponent implements OnInit {
       let parseJson = JSON.stringify(SQUADS);
       window.localStorage.setItem('squads', parseJson);  
     }
+
+    if (window.localStorage.getItem('idStart') === null) {
+      window.localStorage.setItem('idStart', '7');  
+    }
   }
 
   navToHeroes() {

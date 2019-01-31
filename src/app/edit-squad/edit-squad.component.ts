@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Squads } from '../models/squads.model';
 import { Hero } from '../models/heroes.model';
 import { ApiService } from '../services/api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-squad',
@@ -22,10 +23,19 @@ export class EditSquadComponent implements OnInit {
 
   private filteredHeroes: Hero[];
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService, private router: Router) {
+    this.index = JSON.parse(window.localStorage.getItem('indexSquad'));
+    if (this.index === null) {
+      this.router.navigate(['/home']);
+    }
+   }
 
   ngOnInit() {
-    this.index = JSON.parse(window.localStorage.getItem('indexSquad'));
+    // this.index = JSON.parse(window.localStorage.getItem('indexSquad'));
+    // if (this.index === null) {
+    //   this.router.navigate(['/home']);
+    // } else {
+    window.localStorage.removeItem('indexSquad');
     // console.log(this.index);    
     
     this.squads = JSON.parse(window.localStorage.getItem('squads'));
@@ -35,20 +45,19 @@ export class EditSquadComponent implements OnInit {
     // console.log(this.squad);    
 
     this.heroes = this.squad.heroes;
-    console.log(this.heroes);
-    
+    // console.log(this.heroes);
+    // } 
   }
 
   filterHero(event) {
     let query = event.query;
-    // console.log(query);
+    console.log(query);
 
-    this.apiService.getHeroesList(query).subscribe(res => {
-      // this.filteredHeroes = this.filterHero(query, this.heroes);
-      this.filteredHeroes = res.data.results;
-      // console.log(this.filteredHeroes);
-      
-    });
+    if (query.trim().length > 0) {
+      this.apiService.getHeroesList(query.trim()).subscribe(res => {
+        this.filteredHeroes = res.data.results;
+      });
+    }
   }
 
   selectHero(event) {
