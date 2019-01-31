@@ -1,67 +1,47 @@
-<p>
-  heroes works!
-</p>
-    
-<p-table #dt [columns]="cols" [value]="heroes" [rows]="10">
+<h2> Heroes </h2>
+<p>Click on a hero for more information!</p>    
+<p-table #dt [columns]="cols" [value]="heroes" [lazy]="true">
   <ng-template pTemplate="caption">
     <div style="text-align: right">        
-        <input name="filterHero" id="filterHero" [(ngModel)]="filterHero" type="text" pInputText size="50" placeholder="Search your Heroes" (input)="filter()" style="width:auto">
+      <input name="filterHero" id="filterHero" [(ngModel)]="filterHero" type="text" pInputText size="50" placeholder="Search your Heroes" (input)="filter()" style="width:auto">
     </div>
   </ng-template>
-  <!-- <ng-template pTemplate="header" let-columns> -->
   <ng-template pTemplate="header">
     <tr>
-      <!-- <th *ngFor="let col of columns">
-        {{col.header}}
-      </th> -->
       <th>Image</th>
       <th>Hero</th>
       <th>Who is he?</th>
     </tr>
   </ng-template>
-  <!-- <ng-template pTemplate="body" let-rowData let-columns="columns"> -->
   <ng-template pTemplate="body" let-hero>
-    <!-- <tr [pSelectableRow]="rowData"> -->
-    <tr [pSelectableRow]="hero" (click)="selectHero($event, hero, hero.name)">
-      <!-- <td *ngFor="let col of columns">
-        {{rowData[col.field]}}
-      </td> -->
+    <tr [pSelectableRow]="hero" (click)="selectHero($event, hero)">
       <td>
         <img src="{{hero.thumbnail.path}}.{{hero.thumbnail.extension}}" style="display: block; margin-left: auto; margin-right: auto" width="90">
       </td>
-      <td >
-        {{ hero.name }}
-      </td>
-      <td >
-        {{ hero.description }}
-      </td>
+      <td> {{ hero.name }} </td>
+      <td> {{ hero.description }} </td>
     </tr>
   </ng-template>
 </p-table>
-
 <p-paginator [rows]="10" [totalRecords]="totalRecords" (onPageChange)="paginate($event)"></p-paginator>
 
-<p-dialog header="{{heroName}}" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [style]="{width: '400px'}" (onAfterHide)="onDialogHide()">
+<p-dialog header="{{heroName}}" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [style]="{width: '400px'}" (onHide)="onDialogHide()">
   <div class="ui-g" *ngIf="selectedHero">
     <div class="ui-g-12" style="text-align:center">
       <img src="{{selectedHero.thumbnail.path}}.{{selectedHero.thumbnail.extension}}" width="120">
     </div>
-    
-    <p-table #hc [columns]="cols" [value]="comics" [rows]="5">
-        <ng-template pTemplate="header">
-          <tr>
-            <th>Comics</th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-comic>
-          <tr [pSelectableRow]="comic">
-            <td >
-              {{ comic.title }}
-            </td>
-          </tr>
-        </ng-template>
-      </p-table>
-      
-      <p-paginator [rows]="5" [totalRecords]="totalComics" (onPageChange)="paginateComics($event)"></p-paginator>
+    <p-table #hc [columns]="cols" [value]="comics" [lazy]="true">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Comics</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-comic>
+        <tr [pSelectableRow]="comic">
+          <td> {{ comic.title }} </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <p-paginator [rows]="5" [totalRecords]="totalComics" (onPageChange)="paginateComics($event)"></p-paginator>
   </div>
 </p-dialog>

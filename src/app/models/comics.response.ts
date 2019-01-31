@@ -1,5 +1,5 @@
 export interface ComicsResponse {
-    status: string;
-    code: number;
-    data: any;
-  }
+  status: string;
+  code: number;
+  data: any;
+}

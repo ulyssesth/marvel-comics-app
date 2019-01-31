@@ -1,11 +1,8 @@
 <div style="margin: auto; width:50%;">
-
   <h1>Squad: {{ squad.name }}</h1>
-  
-  <p-autoComplete [(ngModel)]="hero" [suggestions]="filteredHeroes" (completeMethod)="filterHero($event)" (onSelect)="selectHero($event)" field="name" [size]="30"
-  placeholder="Search for Heroes" [minLength]="1" [delay]="500"></p-autoComplete>
-  <!-- <span style="margin-left:10px">Hero: {{ hero ? hero.name||hero : 'none' }}</span> -->
-  
+  <p-autoComplete [(ngModel)]="hero" [suggestions]="filteredHeroes" (completeMethod)="filterHero($event)" 
+  (onSelect)="selectHero($event)" field="name" [size]="30" placeholder="Search for Heroes"
+  [minLength]="1" [delay]="500"></p-autoComplete>
   <div>
     <br>
     <table>
@@ -16,8 +13,5 @@
         <td> {{ hero.name }} </td>
       </tbody>
     </table>
-    <!-- <ng-container *ngFor="let hero of heroes">
-      <span> {{ hero.name }} </span>
-    </ng-container> -->
   </div>
 </div>

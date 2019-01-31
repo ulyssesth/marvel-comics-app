@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { SQUADS } from '../mocks/squads-mock';
-import { Squads } from '../models/squads.model';
 import { Router } from '@angular/router';
+
+import { Squads } from '../models/squads.model';
+import { SQUADS } from '../mocks/squads-mock';
 
 @Component({
   selector: 'app-squads',
@@ -11,81 +12,56 @@ import { Router } from '@angular/router';
 export class SquadsComponent implements OnInit {
 
   private squads: Squads;
-
   private newSquadName;
-
   private idSquad;
 
   constructor(private router: Router) { }
 
   ngOnInit() {
-    // if (window.localStorage.getItem('squads') === null) {
-    //   let parseJson = JSON.stringify(SQUADS);
-    //   window.localStorage.setItem('squads', parseJson);  
-    // }
-    
+    // Verifica se os esquadrões ja foram setados em localStorage, senão seta-os.
+    if (window.localStorage.getItem('squads') === null) {
+      let parseJson = JSON.stringify(SQUADS);
+      window.localStorage.setItem('squads', parseJson);  
+    }
+
+    // Verifica se o index para criação de novos esquadrões ja foi setado em localStorage, senão seta-os.
+    if (window.localStorage.getItem('idStart') === null) {
+      window.localStorage.setItem('idStart', '7');  
+    }
+
     this.squads = JSON.parse(window.localStorage.getItem('squads'));
-    // console.log(this.squads);
     this.idSquad = JSON.parse(window.localStorage.getItem('idStart'));
-    console.log(this.idSquad);
-    
   }
 
+  /**
+   * Envia novo squad para o array salvo em localStorage.
+   */
   onSubmit() {
-    // console.log(this.newSquadName);
-
     let arrSquad = JSON.parse(window.localStorage.getItem('squads'));
-    // console.log(arrSquad);
-
     let newSquad: Squads = {
       id: this.idSquad.toString(),
       name: this.newSquadName,
       heroes: []
     };
 
+    this.newSquadName = null;
     this.idSquad ++;
 
     window.localStorage.setItem('idStart', this.idSquad.toString());
-
     arrSquad.push(newSquad);
     let parseString = JSON.stringify(arrSquad);
+
     window.localStorage.setItem('squads', parseString);
-    // console.log(window.localStorage.getItem('squads'));
-    
     this.squads = JSON.parse(window.localStorage.getItem('squads'));
-    
-    // console.log(newSquad);
-    // console.log(this.idSquad);
-    
-    
-    // newSquad.id = this.idSquad;
-    // newSquad.name = this.newSquadName;
-    // newSquad.heroes = [];  
-    
   }
 
+  /**
+   * Seleciona squad para adição de heroes.
+   * @param index posição do objeto hero no array;
+   */
   selectSquad(index: any) {
-  // selectSquad(squad: Squads, index: any) {
-
-    // console.log(squad);
-    
     window.localStorage.removeItem('indexSquad');
-    // let sendSquad = JSON.stringify(index);
     window.localStorage.setItem('indexSquad', index.toString());
-
     this.router.navigate(['/edit-squad']);
   }
-
-  // selectSquad(squad: Squads) {
-  // // selectSquad(squad: Squads, index: any) {
-
-  //   // console.log(squad);
-    
-  //   window.localStorage.removeItem('editSquad');
-  //   let sendSquad = JSON.stringify(squad);
-  //   window.localStorage.setItem('editSquad', sendSquad);
-
-  //   this.router.navigate(['/edit-squad']);
-  // }
-
 }

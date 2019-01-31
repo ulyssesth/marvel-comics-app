@@ -1,25 +1,16 @@
-<p>
-  squads works!
-</p>
+<h2> Squads </h2>
+<p> Click on a squad to add heroes! </p>
 <div style="margin: auto; width:50%;">
-  <!-- </div>
-  <div> -->
-  <!-- <ul class="squads"> -->
-    <form (ngSubmit)="onSubmit()">
-      
-      <span class="ui-float-label">
-        <input id="float-input" type="text" size="30" name="inputSquad" [(ngModel)]="newSquadName" pInputText> 
-        <label for="float-input"> Create your squad </label>
-      </span>
-      <p-button type="submit" label="Add"></p-button>
-    </form>
-    
-    <ng-container *ngFor="let squad of squads">
-      <p-card (click)="selectSquad(squads.indexOf(squad))" [style]="{width: '360px'}">
-      <!-- <p-card (click)="selectSquad(squad, squads.indexOf(squad))" [style]="{width: '360px'}"> -->
-
-        <span> {{ squad.id }} -- {{ squad.name }} </span>
-      </p-card>
-    </ng-container>
-    <!-- </ul> -->
-  </div>
+  <form (ngSubmit)="onSubmit()">
+    <span class="ui-float-label">
+      <input id="float-input" type="text" size="30" name="inputSquad" [(ngModel)]="newSquadName" pInputText> 
+      <label for="float-input"> Create your squad </label>
+    </span>
+    <p-button type="submit" label="Add"></p-button>
+  </form>
+  <ng-container *ngFor="let squad of squads">
+    <p-card (click)="selectSquad(squads.indexOf(squad))" [style]="{width: '360px'}">
+      <span> {{ squad.id }} -- {{ squad.name }} </span>
+    </p-card>
+  </ng-container>
+</div>
