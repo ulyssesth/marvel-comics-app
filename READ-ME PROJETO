@@ -1,0 +1,36 @@
+Instalar node.js 10.15.0
+
+Instalar editor de texto de sua preferencia. Exemplo: Visual Studio Code.
+
+Utilizar terminal para instalar o Angular CLI: 7.2.3 com o comando 'npm install -g @angular/cli'.
+
+Realizar download ou clone do projeto no GitHub.
+
+Realizar o comando 'npm install' no diretorio do projeto para instalação dos modules.
+
+Versões utilizadas:
+     
+Angular CLI: 7.2.3
+Node: 10.15.0
+OS: win32 x64
+Angular: 7.2.2
+... animations, common, compiler, compiler-cli, core, forms
+... language-service, platform-browser, platform-browser-dynamic
+... router
+
+Package                           Version
+-----------------------------------------------------------
+@angular-devkit/architect         0.12.3
+@angular-devkit/build-angular     0.12.3
+@angular-devkit/build-optimizer   0.12.3
+@angular-devkit/build-webpack     0.12.3
+@angular-devkit/core              7.2.3
+@angular-devkit/schematics        7.2.3
+@angular/cdk                      7.3.0
+@angular/cli                      7.2.3
+@ngtools/webpack                  7.2.3
+@schematics/angular               7.2.3
+@schematics/update                0.12.3
+rxjs                              6.3.3
+typescript                        3.2.4
+webpack                           4.28.4
