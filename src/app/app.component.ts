@@ -9,6 +9,6 @@ export class AppComponent {
   title = 'marvel-comics-app';
 
   ngOnInit() {
-    localStorage.clear();
+    //localStorage.clear();
   }
 }

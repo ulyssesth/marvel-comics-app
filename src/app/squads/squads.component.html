@@ -1,18 +1,23 @@
 <p>
   squads works!
 </p>
-
-<ul class="squads">
-  <form (ngSubmit)="onSubmit()">
-
-  <span class="ui-float-label">
-      <input id="float-input" type="text" size="30" name="inputSquad" [(ngModel)]="newSquad" pInputText> 
-      <label for="float-input"> Create your squad </label>
-    </span>
-    <p-button type="submit" label="Add"></p-button>
-  </form>
-
-  <li *ngFor="let squad of squads">
-    <span> {{ squad.id }} </span> {{ squad.name }}
-  </li>
-</ul>
+<div style="margin: auto; width:50%;">
+  <!-- </div>
+  <div> -->
+  <!-- <ul class="squads"> -->
+    <form (ngSubmit)="onSubmit()">
+      
+      <span class="ui-float-label">
+        <input id="float-input" type="text" size="30" name="inputSquad" [(ngModel)]="newSquadName" pInputText> 
+        <label for="float-input"> Create your squad </label>
+      </span>
+      <p-button type="submit" label="Add"></p-button>
+    </form>
+    
+    <ng-container *ngFor="let squad of squads">
+      <p-card (click)="selectSquad(squad)" [style]="{width: '360px'}">
+        <span> {{ squad.id }} </span> {{ squad.name }}
+      </p-card>
+    </ng-container>
+    <!-- </ul> -->
+  </div>

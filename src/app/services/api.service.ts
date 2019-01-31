@@ -35,4 +35,8 @@ export class ApiService {
   getComicsPage(idHero, page): Observable<ComicsResponse> {
     return this.http.get<ComicsResponse>(`${this.baseUrl}characters/${idHero}/comics${this.key}&offset=${(page * this.limitComics)}&limit=${this.limitComics}`);
   }
+
+  getHeroesList(filter): Observable<HeroesResponse> {
+    return this.http.get<HeroesResponse>(`${this.baseUrl}characters${this.key}&nameStartsWith=${filter}`);
+  }
 }
