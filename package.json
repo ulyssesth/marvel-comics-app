@@ -13,7 +13,7 @@
   "dependencies": {
     "@angular-devkit/schematics": "^13.3.5",
     "@angular/animations": "^9.1.13",
-    "@angular/cdk": "^8.2.3",
+    "@angular/cdk": "^9.2.4",
     "@angular/common": "~9.1.13",
     "@angular/compiler": "~9.1.13",
     "@angular/core": "~9.1.13",
